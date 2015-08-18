@@ -24,7 +24,7 @@ public class ScreenSwitcher : MonoBehaviour {
 		if (followHead && !switching) {
 			if (head.position.y > transform.position.y + maxYoffset)//off to right
 				Switch (1);
-			if (head.position.x < transform.position.x - maxYoffset)//off to right
+			if (head.position.y < transform.position.y - maxYoffset)//off to right
 				Switch (2);
 			if (head.position.x > transform.position.x + maxXoffset)//off to right
 				Switch (4);
@@ -33,7 +33,7 @@ public class ScreenSwitcher : MonoBehaviour {
 		} else if (!switching){
 			if (player.position.y > transform.position.y + maxYoffset)//off to right
 				Switch (1);
-			if (player.position.x < transform.position.x - maxYoffset)//off to right
+			if (player.position.y < transform.position.y - maxYoffset)//off to right
 				Switch (2);
 			if (player.position.x > transform.position.x + maxXoffset)//off to right
 				Switch (4);
@@ -55,25 +55,29 @@ public class ScreenSwitcher : MonoBehaviour {
 		if (dir == 1) {
 			iTween.MoveTo (gameObject, iTween.Hash (
 				"y", transform.position.y + screenYdistance, 
-				"time", switchTime
+				"time", switchTime,
+				"easeType", "linear"
 				));
 		}
 		if (dir == 2) {
 			iTween.MoveTo (gameObject, iTween.Hash (
 				"y", transform.position.y - screenYdistance, 
-				"time", switchTime
+				"time", switchTime,
+				"easeType", "linear"
 				));
 		}
 		if (dir == 3) {
 			iTween.MoveTo (gameObject, iTween.Hash (
 				"x", transform.position.x - screenXdistance, 
-				"time", switchTime
+				"time", switchTime,
+				"easeType", "linear"
 				));
 		}
 		if (dir == 4) {
 			iTween.MoveTo (gameObject, iTween.Hash (
 			"x", transform.position.x + screenXdistance, 
-			"time", switchTime
+			"time", switchTime,
+			"easeType", "linear"
 			));
 		}
 		Invoke ("DoneSwitching", switchTime);

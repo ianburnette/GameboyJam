@@ -12,7 +12,7 @@ public class HeadControls : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-		gravDirY = 1;
+		//gravDirY = 1;
 		gravScript.ToggleParticles (true);
 	}
 
