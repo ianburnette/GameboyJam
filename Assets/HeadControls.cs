@@ -10,20 +10,36 @@ public class HeadControls : MonoBehaviour {
 
 	public HeadGravity gravScript;
 
+	public GameObject key;
+
+	public gravityParticles particleScript;
+
 	// Use this for initialization
 	void OnEnable () {
 		//gravDirY = 1;
-		gravScript.ToggleParticles (true);
+	//	gravScript.ToggleParticles (true);
+		particleScript.displayParticles = true;
+		particleScript.direction = new Vector2 (gravDirX, gravDirY);
 	}
 
 	void OnDisable(){
-		gravScript.ToggleParticles(false);
+	//	gravScript.ToggleParticles(false);
+		particleScript.displayParticles = false;
+		particleScript.StopParticles ();
 	}
-	
+
+	public void GetKey(){
+		key.SetActive (true);
+	}
+
+	public void UseKey(){
+		key.SetActive (false);
+	}
+
 	// Update is called once per frame
 	void Update () {
 		GetInput ();
-
+		particleScript.direction = new Vector2 (gravDirX, gravDirY);
 	}
 
 	void FixedUpdate(){

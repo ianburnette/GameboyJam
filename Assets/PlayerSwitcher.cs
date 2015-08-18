@@ -85,4 +85,8 @@ public class PlayerSwitcher : MonoBehaviour {
 			cameraScript.followHead = false;
 		}
 	}
+
+	public void UseKey(){
+		playerHead.transform.GetChild (0).gameObject.SetActive (false);
+	}
 }

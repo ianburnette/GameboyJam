@@ -3,7 +3,8 @@ using System.Collections;
 
 public class pickup : MonoBehaviour {
 
-
+	public bool key;
+	public doorScript door;
 
 	// Use this for initialization
 	void Start () {
@@ -16,8 +17,16 @@ public class pickup : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.transform.tag == "Player") {
-			col.gameObject.GetComponent<PlayerInventory>().GetAbility();
+		if (col.transform.tag == "Head" || col.transform.tag == "Player") {
+			if (key){
+				door.haveKey = true;
+				col.SendMessage("GetKey");
+				GetComponent<SpikeActivator>().Activate();
+				col.GetComponent<health>().SavePosition();
+			}else{
+				col.gameObject.GetComponent<PlayerInventory>().GetAbility();
+			}
+
 			Destroy(gameObject);
 		}
 	}

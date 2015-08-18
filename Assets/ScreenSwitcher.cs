@@ -46,6 +46,7 @@ public class ScreenSwitcher : MonoBehaviour {
 		switching = true;
 		if (followHead) {
 			head.GetComponent<Rigidbody2D> ().isKinematic = true;
+			head.GetComponent<health>().SavePosition();
 			headControls.enabled = false;
 		} else {
 			player.GetComponent<Rigidbody2D> ().isKinematic = true;
