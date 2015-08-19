@@ -49,7 +49,7 @@ public class PlayerSwitcher : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("Fire2") && playerCont.grounded){
+		if (Input.GetButtonDown("Fire2") && playerCont.grounded && playerInControl){
 			SwitchController();
 		}if (player == null) {
 			player = transform;

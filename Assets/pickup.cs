@@ -5,6 +5,7 @@ public class pickup : MonoBehaviour {
 
 	public bool key;
 	public doorScript door;
+	public GameObject ui;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,7 @@ public class pickup : MonoBehaviour {
 				col.GetComponent<health>().SavePosition();
 			}else{
 				col.gameObject.GetComponent<PlayerInventory>().GetAbility();
+				ui.SetActive(true);
 			}
 
 			Destroy(gameObject);

@@ -14,6 +14,8 @@ public class HeadControls : MonoBehaviour {
 
 	public gravityParticles particleScript;
 
+	public float speedLimit;
+
 	// Use this for initialization
 	void OnEnable () {
 		//gravDirY = 1;
@@ -44,6 +46,15 @@ public class HeadControls : MonoBehaviour {
 
 	void FixedUpdate(){
 		ApplyMovement ();
+		LimitSpeed ();
+	}
+
+	void LimitSpeed(){
+		if (rb.velocity.magnitude > speedLimit) {
+			Vector2 velNorm = rb.velocity.normalized;
+			velNorm *= speedLimit;
+			rb.velocity = velNorm;
+		}
 	}
 
 	void ApplyMovement(){
@@ -53,10 +64,17 @@ public class HeadControls : MonoBehaviour {
 	void GetInput(){
 		float h = Input.GetAxisRaw ("Horizontal");
 		float v = Input.GetAxisRaw ("Vertical");
-		
+
+		int intH = Mathf.RoundToInt (h);
+		int intV = Mathf.RoundToInt (v);
+
 		if (h != 0 && v == 0) {
 			if (gravDirX!=h){
-				gravDirX = h;
+				if (h < 0)
+					gravDirX = -1;
+				else
+					gravDirX = 1;
+				//gravDirX = intH;
 				if (h > 0)
 					gravScript.SwitchDirection(3);
 				else
@@ -65,7 +83,11 @@ public class HeadControls : MonoBehaviour {
 			gravDirY = 0; 
 		} else if (h == 0 && v != 0) {
 			if (gravDirY != v){
-				gravDirY = v;
+				if (v < 0)
+					gravDirY = -1;
+				else
+					gravDirY = 1;
+			//	gravDirY = intV;
 				if (v > 0) 
 					gravScript.SwitchDirection(2);
 				else 

@@ -12,7 +12,7 @@ public class PlayerControls : MonoBehaviour {
 	
 	public float yLimit, gravForce;
 
-	public float hSpeed;
+	public float hSpeed, speedLimit;
 	
 	public Rigidbody2D rb;
 	
@@ -32,9 +32,20 @@ public class PlayerControls : MonoBehaviour {
 			
 			AdditionalGravity ();
 		}
-		
+		if (Input.GetKeyDown (KeyCode.F1)) {
+			Application.LoadLevel(0);
+		}
+	//	LimitSpeed ();
 	}
 
+	void LimitSpeed(){
+		if (rb.velocity.magnitude > speedLimit) {
+			Vector2 velNorm = rb.velocity.normalized;
+			velNorm *= speedLimit;
+			rb.velocity = velNorm;
+		}
+	}
+	
 	void CheckForMovement(){
 		float h = Input.GetAxis ("Horizontal");
 		//float v = Input.GetAxis ("Vertical");
@@ -58,16 +69,16 @@ public class PlayerControls : MonoBehaviour {
 	}
 	
 	void CheckForJump(){
-		print ("checking Jump");
+//		print ("checking Jump");
 		if (Input.GetButtonDown ("Jump") && grounded) {
-			print ("released");
+//			print ("released");
 			rb.velocity = new Vector2(rb.velocity.x, jumpUpForce * jumpMultiplier);
 		}
 	}
 	
 	void CheckForRelease(){
 		if (Input.GetButtonUp ("Jump") && rb.velocity.y > 0) {
-			print ("released");
+//			print ("released");
 			rb.velocity = new Vector2(rb.velocity.x, yLimit);
 		}
 	}
